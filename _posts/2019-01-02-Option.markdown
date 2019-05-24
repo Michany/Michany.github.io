@@ -1,3 +1,12 @@
+---
+layout: post
+title:  "期权基础知识"
+date:   2019-01-02 23:59:59
+author: Michael Wang
+categories: Jekyll
+tags:	quant option
+cover:  "/assets/instacode.png"
+---
 # 期权基础知识 
 _2019/3/27_
 

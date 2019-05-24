@@ -1,11 +1,6 @@
-.DS_Store
-
-# Compiled site
 _site
-
-# Sass garbage
-.sass-cache
-
-# Bundler
-.bundle/
-vendor/
+node_modules
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+*.sh
