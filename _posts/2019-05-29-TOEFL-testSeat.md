@@ -67,7 +67,7 @@ $.getJSON("testSeat/queryTestSeats",{{city: "{city}",testDay: "{date}"}});
 ```py
 for city in citiesList[23:]:
     for date in daysList[2:13]:
-        js = f'return $.getJSON("testSeat/queryTestSeats",{{city: "{city}",testDay: "{date}"}});'
+        js = 'return $.getJSON("testSeat/queryTestSeats",{city: "{city}",testDay: "{date}"});'
         dataJSON = driver.execute_script(js)
 ```
 
