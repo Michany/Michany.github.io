@@ -17,7 +17,7 @@ The Briain constitution is "unwritten". It once showed its superiority, but with
 
 The Brexit referendum never stated claerly the precise precedures of leaving the EU, not did it clarify the duty of all parties in performing a successful Brexit. As a result, the British are now facing the situation that a no-deal Brexit is approaching in Oct 31st.
 
-![Front Page](../img/in-post/econ-0601-Britain.png)
+![Front Page](/img/in-post/econ-0601-Britain.png)
 
 What's worse, the recent trumph of Scotland Party in the EU parliament has made Scotland more confident in claiming indenpence from UK.
 > Scotland voted Remain in the referendum, and the snp’s leaders can understandably
@@ -29,7 +29,17 @@ Sadly, maybe such filthy actions have already been forgotten.
 
 ## Economy
 ### Trade War
-Alibaba’s experience shows how relations between America and China have soured
+US policitians are talking about how to *banish* Chinese's companies that listed in Nasdaq, incluing the E-commerce gaints -- Alibaba. 
+
+Alibaba is said to plan a second list in HK to avoid raising all its capital in US market. 
+Alibaba’s experience shows how relations between America and China have soured.
+
+Surprisingly, Jack Ma is foubd a Communist Party member, which makes his reputation worse.
+
+> In November Mr Ma’s halo in America slipped when it was revealed 
+> he was a Communist Party member, like many Chinese tycoons
+
+
 
 
 
