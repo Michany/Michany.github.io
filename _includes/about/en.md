@@ -17,7 +17,7 @@ I'm going to persuit my Master's Degree on Financial Engineering (MFE) in 2020 F
 
 ##### Papers
 
-- [Hidden Markov Model on Stocks and Option Volatility][1] · Term Paper of *Stochastic Process*.
+- [Hidden Markov Model on ETF and Futures Spread][1] · Course Project of *Stochastic Process*.
 
 [1]: https://michany.github.io/portfolio/
 
