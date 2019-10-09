@@ -61,7 +61,7 @@ citiesJSON = driver.execute_script('return $.getJSON("getTestCenterProvinceCity"
 ### 获取关键信息
 利用上述`getJSON`方法，可以获取关键的考场和考位信息。
 ```js
-$.getJSON("testSeat/queryTestSeats",{{city: "SHANGHAI",testDay: "2019-09-22"}});
+$.getJSON("testSeat/queryTestSeats",{city: "SHANGHAI",testDay: "2019-09-22"});
 ```
 如果不采用Selenium，直接使用Python的Request库进行请求，则会需要把cookie值一起添加到请求中去；而cookie值的破译相当麻烦。使用`getJSON`方法即方便又自然，不容易被服务器发现。
 ```py
