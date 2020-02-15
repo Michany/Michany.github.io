@@ -8,7 +8,8 @@ I am @Michany (Michael Wang), an undergraduate student in Shanghai Jiao Tong Uni
 Expect to get my Bachelor's Degree in 2020. 
 
 I've been working in some hedge hunds in Shanghai as a quantitative research intern.   
-For more information on my previous and current works, please refer to the [*Portfolio*](https://michany.github.io/portfolio/) page.  
+`FieldsInvest => EverBright Securities => UBS Securities => Neuberger Berman`  
+For more information on my previous works, please refer to the [*Portfolio*](https://michany.github.io/portfolio/) page.  
 For more information on my **work experience**, please refer to my [*Linkedin*](https://www.linkedin.com/in/michael-learns/) page.
 
 
