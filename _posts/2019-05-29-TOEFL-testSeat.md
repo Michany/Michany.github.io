@@ -5,6 +5,7 @@ subtitle: "Auto Query of TOEFL Test Seats"
 author: "Michael Wang"
 header-img: "img/post-bg-js-version.jpg"
 header-mask: 0.3
+catalog: true
 tags:
   - Web Crawler
   - Python

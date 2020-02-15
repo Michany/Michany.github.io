@@ -5,6 +5,8 @@ subtitle: "How to deploy SeaCloud Private Drive"
 author: "Michael Wang"
 header-img: "img/post-bg-SeaCloud.jpg"
 header-mask: 0.3
+
+catalog: true
 tags:
   - Ubuntu
 ---

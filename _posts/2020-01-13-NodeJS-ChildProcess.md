@@ -5,6 +5,7 @@ subtitle: "How to Kill NodeJS Child Process on Linux"
 author: "Michael Wang"
 header-img: "img/post-bg-js-version.jpg"
 header-mask: 0.3
+catalog: true
 tags:
   - Ubuntu
   - JavaScript

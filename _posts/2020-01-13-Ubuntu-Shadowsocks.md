@@ -5,6 +5,7 @@ subtitle: "How to run and config Shadowsocks on Ubuntu Server"
 author: "Michael Wang"
 header-img: "img/post-bg-css.jpg"
 header-mask: 0.3
+catalog: true
 tags:
   - Ubuntu
   - Python
