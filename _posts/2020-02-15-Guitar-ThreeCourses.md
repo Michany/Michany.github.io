@@ -3,7 +3,7 @@ layout: post
 title: "[Guitar] Three Courses and an Open Canoe"
 subtitle: "Guitar Tabs Powered by Guitar Pro"
 author: "Michael Wang"
-header-img: "img/post-bg-SeaCloud.jpg"
+header-img: "img/post-bg-guitar.jpg"
 header-mask: 0.3
 tags:
   - Guitar
