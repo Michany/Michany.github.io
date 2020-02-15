@@ -13,6 +13,7 @@ tags:
 #### Album: Two Years in April
 ![Album Front Cover](/img/in-post/Two_years_in_april.jpg)
 
+
 #### Lyrics
 > If you lie to me by  
 > Three courses to try  
@@ -35,9 +36,10 @@ tags:
 > Stripes and the news  
 > That I know you before  
 > You face all the doors  (x2)
+
 #### Guitar Tabs
-![Page 1](/img/in-post/Three_Courses_and_an_Open_Canoe_1.jpg)
-![Page 2](/img/in-post/Three_Courses_and_an_Open_Canoe_2.jpg)
+![Page 1](/img/in-post/Three_Courses_and_an_Open_Canoe_1.png)
+![Page 2](/img/in-post/Three_Courses_and_an_Open_Canoe_2.png)
 
 #### 曲谱下载链接 Download Links
 - pdf file: [Download Here](http://pan.michany.xyz:8000/f/931dd331eba749698c30/?dl=1)
