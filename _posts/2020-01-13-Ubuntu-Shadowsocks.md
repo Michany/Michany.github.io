@@ -11,6 +11,8 @@ tags:
   - Python
 ---
 
+**推荐一个Shadowsocks服务商** [https://portal.shadowsocks.nl/](https://portal.shadowsocks.nl/aff.php?aff=32299)
+
 ## 下载安装
 ### 环境
 Ubuntu 18.04 64bit 阿里云HK
