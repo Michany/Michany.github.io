@@ -139,6 +139,27 @@ Year | Total % of   Program Trades on the NYSE | % of Buy Programs   on the NYSE
 1995 | 11.60% | 6.40% | 5.20%
 
 ## Program Trade Example
+Steps to trade a portfolio, trying to achieve quality executions while minimizing market impact.
+### 分析交易的成份股和其流动性
+**Determining the optimal tranche size and generating pre-trade liquidity.**   
+一般来说，交易量<35% ADV (Average Daily Volume)，可以被放入一揽子交易。ADV一般有过去20天的交易量来决定。
+
+一张典型的一揽子交易单如下，可以看到这是一个流动性较好的组合。
+
+ADV% Lower | ADV% Upper | Stocks | Shares | $   Value | Weight
+-- | -- | -- | -- | -- | -- | -- | -- | -- | --
+0.0% | 0.5% | 53 | 24,934 | 3,717,268 | 1.24%
+0.5% | 2.5% | 38 | 6,545,310 | 162,036,173 | 54.01%
+2.5% | 5.0% | 6 | 6,686,544 | 116,923,962 | 38.97%
+5.0% | 10.0% | 0 | 687,634 | 15,834,422 | 5.28%
+10.0% | 15.0% | 1 | 0 | 0 | 0.00%
+15.0% | 20.0% | 0 | 554,157 | 1,515,236 | 0.51%
+20.0% | 30.0% | 0 | 0 | 0 | 0.00%
+30.0% | 40.0% | 0 | 0 | 0 | 0.00%
+40.0% | 50.0% | 0 | 0 | 0 | 0.00%
+Total || 100 | 14,498,579 | 300,027,060 | 100.00%
+
+
 
 
 
