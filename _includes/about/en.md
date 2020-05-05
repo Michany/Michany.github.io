@@ -15,10 +15,25 @@ For more information on my **work experience**, please refer to my [*Linkedin*](
 
 ##### Future Careers
 
-I'm going to persue my Master's Degree on Financial Engineering (MFE) in 2020 Fall. 
-Hopefully, I'll see you around in New York next year!
+I'm going to pursue my Master's Degree on Financial Engineering (MFE) in 2020 Fall.   
+~~Hopefully, I'll see you around in New York next year!~~
 
 I received a full-time return offer from UBS after my internship in summer 2019.
+
+---------------------------
+*Updated in May 2020*
+
+Graduate offer received:
+- CMU - Master of Science in Computational Finance (Ranked 3rd)
+- Columbia University - Master of Science in Financial Engineering (Ranked 3rd)
+
+However, I've decided to work for:
+- UBS Securities, Trading (1st rotation)
+- UBS Futures, Trading (2nd rotation)
+
+
+
+
 
 ##### Projects & Portfolios
 

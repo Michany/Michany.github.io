@@ -1,3 +1,3 @@
 # Michael Blog
 
-Just visit the [website](https://michany.github.io/) anyway.
+Just visit the [website](https://blog.michany.com/) anyway.
