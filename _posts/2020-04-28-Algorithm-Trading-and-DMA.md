@@ -3,7 +3,7 @@ layout: post
 title: "Algorithmic Trading & OMA"
 subtitle: "Essences of Trading Books"
 author: "Michael Wang"
-header-img: "img/home-bg-art.jpg"
+header-img: "img/post-bg-AlgoTrading.jpg"
 header-mask: 0.3
 mathjax: true
 catalog: true
@@ -117,8 +117,27 @@ Buy-side通过broker的基础系统，直接连接到交易所并下单。
 
 -------------------------------------------
 
-# Orders
+# [Chapter 4] Orders
+> Orders are the fundamental building block for any trading strategy.
 
+## Order Types
+- Market Order
+  - depend on current market conditions (liquidity)
+  - speed and certainty of execution
+- Limit Order
+  - lack of execution certainty
+  - has potential to gain from future trend
 
+## Order Options
+### Duration
+- good for the day (GFD) 
+- good til date (GTD)
+- good tile cancel (GTC)
+- good after time (GAT)
 
+### Auction session instructions
+集合竞价的指令，一般是为了最大化订单完成率
+- market on open (MOO): 开盘集合竞价，若未成交则转限价或取消
+- market on close (MOC)
+- limit on close (LOC): 收盘限价单，限制交易价格or只有满足一定数量才交易
 

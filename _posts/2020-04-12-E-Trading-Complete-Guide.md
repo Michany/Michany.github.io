@@ -3,7 +3,7 @@ layout: post
 title: "Electronic and Algorithmic Trading Technology - The Complete Guide"
 subtitle: "Essences of Trading Books"
 author: "Michael Wang"
-header-img: "img/home-bg-art.jpg"
+header-img: "img/post-bg-AlgoTrading.jpg"
 header-mask: 0.3
 mathjax: true
 catalog: true
