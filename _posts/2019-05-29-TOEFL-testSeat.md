@@ -139,8 +139,7 @@ storage = pd.DataFrame()
 
 for city in citiesList:
     for date in daysList:
-        js = 'return $.getJSON("testSeat/queryTestSeats",'+\
-        f'{{city: "{city}",testDay: "{date}"}});'
+        js = 'return $.getJSON("testSeat/queryTestSeats",{' + f'city: "{city}",testDay: "{date}"' + '});'
         try:
             dataJSON = driver.execute_script(js)
         except Exception as e:
