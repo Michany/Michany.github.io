@@ -176,29 +176,175 @@ Buy-side通过broker的基础系统，直接连接到交易所并下单。
 - Cost-driven：尽量降低总的交易成本
 - Opportunistic algo：抓住一切有利的交易条件
 
-## TWAP
+## Impact-driven
+### TWAP
 TWAP内容很简单，但是有一些变种。
 ![TWAP Rate](/img/in-post/[AlgoTrading]TWAPCompletionRate.png)
 Aggressive一开始做得快一些。
 
-## VWAP
+### VWAP
 Given $n$ trades in a day, each with a specific price $P_n$ and size $v_n$
 $$
 \mathrm{VWAP} = \frac{\sum_n{v_nP_n}}{\sum_n{v_n}}
 $$
 但是预先不知道每天的实际交易情况，所以要进行估计。一般是拿历史数据计算每个时间段$j$的交易比例$v_j$，这样交易得到的VWAP价格为
+
 $$
 \mathrm{VWAP} = \sum_j{v_j\bar{P_j}}
 $$
+
 每个时间段的实际交易量目标是$x_j=v_jX$，其中$X$是总的订单量。
 
 > **Trending/Tilting**
 > 如果预计到一天内有趋势，那就可以将VWAP的分配适当向开始/结尾时间段倾斜
 
-## Percent of Volume (POV)
+### Percent of Volume (POV)
 > *AKA.* volume  inline, participation, target  volume or  follow algorithms  
+> 保持对市场成交量的跟踪，一般是20%左右，什么时候做完了就结束。
 
-保持对市场成交量的跟踪，一般是20%左右，什么时候做完了就结束。
+**Detailed illustration**  
+计算成交量比例时，要将自己的交易量也考虑在内，计算公式是
+$$
+MyTrade = TotalTrade\times\frac{x}{1-x}
+$$
+。其中$x$就是想要的比例，$\frac{1}{1-x}$被称作调整系数。
+
+每15分钟作为一个区间，一个区间内按照累计交易量进行跟踪。
+![POV](/img/in-post/[AlgoTrading]POV.png)
+当市场已经成交了1700股时，需要成交的量是$1700*0.2/0.8=425\simeq400$
+
+**Problems**  
+- 如果大家竞争着交易一个流动差的资产，则会造成巨大的**Market Impact**
+  - 使用price limit来避免
+- 如果固定跟踪每段时间的交易量，容易被识别，造成**Signalling Risk**
+  - 跟踪累计的成交量，缩小每段时间间隔
+- 如果突然出现一些大单**Volume Spikes**，会使得瞬间落后于进度，这时候再去跟随已经来不及了
+  - 将目标成交量和当前orderbook相比，或者设限忽略大额订单
+
+**Common Variations**  
+> **Price adaptive versions of POV algorithms**  
+> 根据当前价格和某个benchmark（可以是VWAP，也可以是指数）比较，调整参与率
+
+
+思考：如何识别？
+
+## Cost-driven
+### Implementation Shortfall (IS)
+> Implementation shortfall represents the difference between the price at which the investor decides to  trade and the  average execution price that is  actually achieved. 
+> 目标：下单时价格和实际成交价之间的差距最小
+
+书中主要举例2类
+- Based on statical trading schedules
+    1. 根据全天 VWAP 的方法，算出每个时间段需要成交多少量，然后折算到客户规定的交易时间
+    2. 添加一个 $tilt$ 参数（从1.3到0.7，每小时递减0.1）这种方式比较类似于 tilted VWAP
+  
+  例如8:45-9:00这个时间段：
+  本来全天VWAP是需要5.8%的成交量，现在客户要求在14:30之前做完，所以这个时间段的交易量被放大到9.4%。  
+  接着，$tilt$ 参数在此时为1.3，需要在上一步基础上再增加成交量，所以该时间段总的成交量$=10000 \times 9.4 \% \times 1.3 = 1222$
+
+- Dynamic reaction to market volume
+    1. 根据历史交易，当天14:30前大约有30000股成交，客户要求10000股，所以得到参与率33.3%
+    2. 根据 INLINE Participation 的方法，参与33%的成交量，也就是市场每成交200股要下单100股
+    3. 同样添加 $tilt$ 参数（从+3%，每小时递减1%），也就是一开始参与率36%，后来递减到35%, 34%...
+
+*反思：感觉非常不智能，如果当天价格又回到下单价附近，岂不是可以一次性多买一些？算法中没有考虑到这个因素。*
+
+### Adaptive Shortfall (AS)
+基本原理就是在合适的价格时，提高Participation，多买一些。  
+![AdaptiveShortfall](/img/in-post/[AlgoTrading]AdaptiveShortfall.png)
+- Aggressive In-the-Money (AIM)
+- Passive In-the-Money (PIM)
+
+> An AIM strategy assumes that trends are  short-lived and will soon revert, whereas a PIM approach relics on the trend persisting  
+> AIM建立在反转的基础上，PIM建立在趋势的基础上
+
+## Opportunistic algorithms 
+### Price Inline (PI)
+基本上就是 Adaptive Shortfalls
+### Liquidity Driven
+> Liquidity aggregation: summing the available orders at each price point across all  the different  venues
+
+基本原则：短期流动性充裕、订单簿很深、价格又很有利，就会加大参与度。
+![LiquidityDriven](/img/in-post/[AlgoTrading]LiquidityDriven.png)
+上图就是一个纯粹是Liquidity-driven的算法，**当市场条件不利的时候，就完全不交易**。同时，当市场条件有利的时候（价格下降、订单深度足够）就会出现Spikes
+![LiquidityDrivenParticipationRate](/img/in-post/[AlgoTrading]LiquidityDrivenParticipationRate.png)
+
+*此外，还有奇奇怪怪的Gamma Weighted Average Price (GWAP)等等，主要是对期权的交易。*
+
+# [Chapter 6] Transaction Costs
+
+##  Pre-trade analysis
+### Price Data
+**Markel prices, Price ranges, Trends/momentum**
+### Liquidity data
+#### **average daily volume (ADV)**  
+ADV一般由过去30到90天的交易量计算，一般一天能做20-25%的ADV。  
+
+可以使用ADV决定 $\mathrm{Trade Horizon }=\dfrac{\mathrm{Size}}{\mathrm{ADV}\times\alpha}$。
+其中$\alpha$代表想要的交易参与率。
+
+可以使用 coefficient of variation (CV)来衡量历史成交量的稳定程度。
+$\mathrm{CV}=\sigma(\mathrm{ADV})/\mathrm{ADV}$  
+如果当天才开盘一小时，就已经产生了50%ADV，那么很明显应该调整。
+### Risk data
+**standard deviation of price returns, beta**
+
+## Post-trade analysis 
+- **Benchmark comparison**  
+![](/img/in-post/[AlgoTrading]BenchmarkPrices.png)
+对于特别大的订单（>30% ADV），用VWAP做比较可能不太好。
+
+> **如何计算bps？**  
+> 例如下单50000@90，实际执行了45000@92.63，VWAP@92.40  
+> $\dfrac{(92.63-92.40)*45000}{50000*90}=0.23\%=23\ bps)$
+
+- **Relative Performance Measure (RPM)**
+> It is based on a comparison of what the trade achieved in relation to the rest of the market
+
+$$
+RPM(volume)=\dfrac{\mathrm{Total\ volume\ at\ price\ less\ favourable\ than\ execution}}{\mathrm{Total\ market\ volume }}
+$$
+
+
+$$
+RPM(price)=\dfrac{\mathrm{Number\ of\ trades\ at\ price\ less\ favourable\ than\ execution}}{\mathrm{Total\ number\ of\ trades }}
+$$
+
+从公式可以看出，RPM的主要优势是normalized，而且可以在不同的资产/订单之间比较。
+
+- **Implementation shortfall** 
+
+理论上
+
+$$
+IS=Returns_{paper} - Returns_{real}
+$$
+
+现实中，设下单时间$P_d$，市场收盘价$P_N$，下单量$X$，算法拆单到每单$x_j$@$p_j$
+
+$$I S=\underbrace{X\left(p_{N}-p_{d}\right)}_{\text {Returns }_{\text {paper }}}-\underbrace{\left(X p_{N}-\sum x_{j} p_{j}-f i x e d\right)}_{\text {Returns }_{R e a l}}=\sum x_{j} p_{j}-X p_{d}+\text { fixed }$$
+
+如果更加真实一点，没有被全部执行，未执行的量是$\left(X-\sum x_{j}\right)$。
+
+$$I S=\underbrace{\sum x_{j} \left(p_{j}-p_{d}\right) }_{\text {Fixecution Cost }}+\underbrace{\left(X-\sum x_{j}\right)\left(p_{N}-p_{d}\right)}_{\text {Opportunity cost }}+\text { fixed }$$
+
+## Breaking down transaction costs 
+![TradingCostBreakDown](../img/in-post/[AlgoTrading]TradingCostBreakDown.png)
+
+- Timing Cost (TC)  
+   Price Trend + Timing Risk (volatility, illiquidity, not-fully-execution) 
+- Spread Cost (SC)
+- Market Impact (MI)  
+   Temporary Impact + Permanent Impact(infomation leakage)  
+    如果一下子下单太大，击穿(Walk-the-book)，等到回复的时候就会留下Permanent Impact
+- Opportunity cost
+  由于off-limit / iliquidity，没有完全执行订单
+
+## Transaction costs across world markets
+书中都是旧数据了，到时候入职直接看ubs报告就完事了。
+
+# [Chapter 7] Optimal trading strategies 
+
 
 
 
