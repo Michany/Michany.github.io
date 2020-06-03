@@ -344,10 +344,53 @@ $$I S=\underbrace{\sum x_{j} \left(p_{j}-p_{d}\right) }_{\text {Fixecution Cost 
 书中都是旧数据了，到时候入职直接看ubs报告就完事了。
 
 # [Chapter 7] Optimal trading strategies 
+**拿到一个订单，如何选取最优的交易策略？**
 
+## Difficulty of the orders
+首先，估计交易的难易程度，综合考虑以下因素：
+1. Order Size
+2. Liquidity
+3. Volatitlity
+4. Price Momentum
+5. Urgency
+6. Trading Horizon 
+![CostVSADV](/img/in-post/[AlgoTrading]CostVSADV.png)
+这张图反映出不同ADV、不同流动性下的交易成本bps
 
+## Efficient Trading Frontier
+类似于Markowitz对股票的有效前沿理论，Robert Almgren and Neil Chriss (2000) 也对交易策略提出了类似模型(交易成本 vs. 交易风险)
 
+$$\min _{x}(E(x)+\lambda V(x))$$
 
+其中$E(x)$代表交易成本，$\lambda$代表风险偏好系数(大约在$10^{-6}$左右，和风险偏好程度成反比，和风险规避程度成正比)，$V(x)$代表风险()。
 
+整个有效前沿如下图，横轴是Timing Risk或者Variance，纵轴是期望的交易成本。
+![EfficientFrontier](/img/in-post/[AlgoTrading]EfficientFrontier.png)
+
+上图还反映出不同的benchmark选择会导致不同的有效前沿。很明显，同样的cost下，使用昨收价的风险是很大的，使用今收价的风险最小。具体表达式如下
+![BenchmarkForEFT](/img/in-post/[AlgoTrading]BenchmarkForEFT.png)
+
+其中
+- Permanent impact $g()$ ~ order size $X$
+- Temporary impact $h()$ ~ order size $X$, trade rate $\alpha$
+- Timing risk ~ price volatility $\sigma()$ ~ error factor/random noise $\epsilon$ 
+
+主要由三种优化目标
+1. 给定risk level，最小化cost
+   
+2. 给定cost level，达到price improvement
+   ![PriceImprovement](../img/in-post/[AlgoTrading]PriceImprovement.png)
+   给定cost level @ C，做切线与有效前沿相切，切点就是目标的最优化点。在图中，给定50bps的交易成本，通过承受150bps的择时风险，可以将交易成本降低到$X_3$处。
+3. 平衡cost & risk
+   ![BalanceRiskCost](/img/in-post/[AlgoTrading]BalanceRiskCost.png)
+   给定风险偏好系数$\lambda$，以其为斜率做切线，可以将交易成本和择时风险平衡在$X_2$处。
+
+有效前沿上不同的点，代表不同的交易算法或者不同的参数设定，一般可以如下标注
+![AlgoOnCurve](/img/in-post/[AlgoTrading]AlgoOnCurve.png)
+其中，TWAP是唯一不在边界上的点，因为它单纯拆单、没考虑市场情况。
+
+##  A decision tree for strategy selection
+
+![DecisionTree](/img/in-post/[AlgoTrading]DecisionTree.png)
 
 
