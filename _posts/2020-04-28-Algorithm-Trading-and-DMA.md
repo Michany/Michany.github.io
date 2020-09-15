@@ -379,7 +379,7 @@ $$\min _{x}(E(x)+\lambda V(x))$$
 1. 给定risk level，最小化cost
    
 2. 给定cost level，达到price improvement
-   ![PriceImprovement](../img/in-post/[AlgoTrading]PriceImprovement.png)
+   ![PriceImprovement](/img/in-post/[AlgoTrading]PriceImprovement.png)
    给定cost level @ C，做切线与有效前沿相切，切点就是目标的最优化点。在图中，给定50bps的交易成本，通过承受150bps的择时风险，可以将交易成本降低到$X_3$处。
 3. 平衡cost & risk
    ![BalanceRiskCost](/img/in-post/[AlgoTrading]BalanceRiskCost.png)
@@ -392,5 +392,77 @@ $$\min _{x}(E(x)+\lambda V(x))$$
 ##  A decision tree for strategy selection
 
 ![DecisionTree](/img/in-post/[AlgoTrading]DecisionTree.png)
+
+----------------------------------------
+
+
+# [Chapter 8] Order placement
+## Price Formation Models
+### Inventory-based models
+做市商采用的策略。做市商的目的是尽可能保持存货不变（顺便赚一些小钱）。
+
+当存货偏离幅度变大时，做市商的 bid-ask spread 也会相应变大。例如下图，圆心代表bid/ask的报价，圆直径代表order size。
+
+![InventoryBasedModels](/img/in-post/[AlgoTrading]InventoryBasedModels.png)
+
+当存货偏少时，做市商会提高bid价格，反之亦然。
+有时候监管要求做市商报价不能偏离当前bid/ask太多，此时另一种方式是改变size，一般小的size会抑制对手方行动，大的size会鼓励对手方。
+
+当有多个做市商时，由于竞争存在，bid-ask spread往往会更小。
+> Spread is negatively correlated with the degree of competition faced by market makers
+
+### Information-based models 
+信息不对称，有内幕消息的人会得利。
+
+### Order book data models
+订单簿比较深的时候，新订单比较激进；订单簿深度比较小的时候，新订单往往更加不激进。
+
+### Combined models
+综合考虑存货变动、信息不对称等因素。考虑的变量如下：
+- order imbalance 
+- prior order aggressiveness 
+- short-term volatility 
+  
+  波动率上升时，限价单更加少出现。
+- short-term price momentum 
+  
+  $$M O M_{t}=\frac{P_{t}}{E M A_{t}\left(P_{i}\right)}=\frac{P_{t}}{\lambda E M A_{t-1}\left(P_{i}\right)+(1-\lambda) P_{t}}$$
+
+  动量大时，买单会更加aggressive，卖单相反。
+- relative spread 
+- timeframe 
+  插图是西班牙市场。
+  ![IntradayPatterns](/img/in-post/[AlgoTrading]IntradayPatterns.png)
+  - Volume：两边高、中间低
+  - Spread：开盘高、后来低
+  - Orderbook Depth：开盘低、后来稍高
+  - Volatility：两边高、中间低
+
+## Price discovery/Order matching
+主要讲的是成交机制。
+
+## Order Survival
+![OrderSurvival](/img/in-post/[AlgoTrading]OrderSurvival.png)
+
+![HitRate](/img/in-post/[AlgoTrading]HitRate.png)
+
+
+# [Chapter 9] Execution Tactics 
+
+> Execution tactics focus on the micro level decisions that need to be made when trading. They are responsible for the actual execution, monitoring the order book and managing order submission. 
+
+一些常用的技巧及其对应的目的（只能算是思路，称不上是算法）
+![CommonTactics](/img/in-post/[AlgoTrading]CommonTactics.png)
+
+
+
+
+
+
+
+
+
+
+
 
 
